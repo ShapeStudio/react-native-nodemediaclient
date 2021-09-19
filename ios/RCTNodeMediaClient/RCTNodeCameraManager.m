@@ -31,7 +31,7 @@ RCT_EXPORT_VIEW_PROPERTY(dynamicRateEnable, BOOL);
 RCT_EXPORT_VIEW_PROPERTY(smoothSkinLevel, int);
 RCT_EXPORT_VIEW_PROPERTY(cryptoKey, NSString)
 RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
-
+RCT_EXPORT_VIEW_PROPERTY(onCapturePicture, RCTBubblingEventBlock)
 
 RCT_EXPORT_METHOD(startprev:(nonnull NSNumber *)reactTag)
 {
@@ -91,6 +91,16 @@ RCT_EXPORT_METHOD(flashEnable:(nonnull NSNumber *)reactTag enable:(BOOL)enable)
    ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, RCTNodeCameraView *> *viewRegistry){
      RCTNodeCameraView *view = viewRegistry[reactTag];
      [view setFlashEnable:enable];
+   }];
+}
+
+RCT_EXPORT_METHOD(capturePicture:(nonnull NSNumber *)reactTag)
+{
+
+  [self.bridge.uiManager addUIBlock:
+   ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, RCTNodeCameraView *> *viewRegistry){
+     RCTNodeCameraView *view = viewRegistry[reactTag];
+    [view capturePicture];
    }];
 }
 
